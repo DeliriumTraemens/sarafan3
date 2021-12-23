@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name ="usr")
 @Data
 public class User implements Serializable {
+	
 	@Id
 	private String id;
 	
