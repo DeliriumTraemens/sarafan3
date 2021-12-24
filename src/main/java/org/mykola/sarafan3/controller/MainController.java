@@ -3,6 +3,7 @@ package org.mykola.sarafan3.controller;
 import org.mykola.sarafan3.domain.User;
 import org.mykola.sarafan3.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ public class MainController {
 	
 	@Autowired
 	MessageRepository messageRepo;
+	@Value("${spring.profiles.active}")
+	private String profile;
 	
 	@GetMapping
 	public String mainPage(Model model, @AuthenticationPrincipal User user){
@@ -25,6 +28,7 @@ public class MainController {
 		data.put("profile", user);
 		data.put("messages", messageRepo.findAll());
 		model.addAttribute("frontendData", data);
+		model.addAttribute("isDevMode","dev".equals(profile));
 		
 		return "index";
 	}
