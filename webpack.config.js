@@ -13,6 +13,10 @@ module.exports = {
             'localhost:8080'
         ]
     },
+
+    stats: 'errors-only',
+    /*clientLogLevel: 'error',*/
+
     module: {
         rules: [
             {
