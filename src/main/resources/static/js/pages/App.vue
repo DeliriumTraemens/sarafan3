@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-app">
     <div v-if="!profile">Необходимо авторизоваться через
         <a href="/login">Google</a>
     </div>
@@ -13,7 +13,8 @@
 <script>
     import MessagesList from 'components/messages/MessageList.vue'
     import { addHandler } from 'util/ws'
-    import {getIndex} from 'util/collections'
+    import { getIndex } from 'util/collections'
+
     export default {
         components: {
             MessagesList
@@ -26,8 +27,8 @@
         },
         created() {
             addHandler(data =>{
-               let index = getIndex(this.messages, data)
-                if(index > -1){
+               let index = getIndex(this.messages, data.id)
+                if (index > -1) {
                     this.messages.splice(index, 1, data)
                 } else {
                     this.messages.push(data)
@@ -38,5 +39,7 @@
 </script>
 
 <style scoped>
-
+    .main-app{
+        background-color: bisque;
+    }
 </style>

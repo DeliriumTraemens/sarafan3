@@ -25,7 +25,7 @@
         methods: {
             save() {
 
-                sendMessage({id: this.id, text: this.text})
+                sendMessage({id: this.id, text: this.text});
                 this.text = ''
                 this.id = ''
 

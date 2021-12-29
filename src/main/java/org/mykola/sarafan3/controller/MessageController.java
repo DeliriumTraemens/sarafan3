@@ -59,7 +59,15 @@ public class MessageController {
 	
 	@MessageMapping ("/changeMessage")
 	@SendTo("/topic/activity")
-	public Message change(Message message){
+	public Message message(Message message){
+		
+		message.setCreationDate(LocalDateTime.now());
+		
+		System.out.println("\n--------------------");
+		System.out.println("message From site");
+		System.out.println("\n--------------------");
+		System.out.println(message);
+		System.out.println("\n--------------------");
 		
 		return messageRepo.save(message);
 	}
