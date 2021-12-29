@@ -1,6 +1,10 @@
 package org.mykola.sarafan3.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import org.mykola.sarafan3.domain.MesDto;
 import org.mykola.sarafan3.domain.Message;
 import org.mykola.sarafan3.domain.Views;
 import org.mykola.sarafan3.repository.MessageRepository;
@@ -9,6 +13,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,18 +64,23 @@ public class MessageController {
 	
 	@MessageMapping ("/changeMessage")
 	@SendTo("/topic/activity")
-	public Message message(Message message){
-		
-		message.setCreationDate(LocalDateTime.now());
-		
-		System.out.println("\n--------------------");
-		System.out.println("message From site");
-		System.out.println("\n--------------------");
-		System.out.println(message);
-		System.out.println("\n--------------------");
-		
-		return messageRepo.save(message);
+	public Message messageEditor(JSONObject json) throws JsonProcessingException {
+	
+		String idx = String.valueOf(json.get("id"));
+		String text = String.valueOf(json.get("text"));
+		if (idx.equals("")){
+			Message newMessage=new Message();
+				newMessage.setText(text);
+				newMessage.setCreationDate(LocalDateTime.now());
+			return messageRepo.save(newMessage);
+		}else{
+			Message messageToUpdate=messageRepo.findById(Long.valueOf(idx)).get();
+				messageToUpdate.setText(text);
+				messageToUpdate.setCreationDate(LocalDateTime.now());
+	
+			return messageRepo.save(messageToUpdate);
+			}
 	}
 	
 	
-}
+}//EndOfClass

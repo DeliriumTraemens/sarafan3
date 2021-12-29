@@ -6,13 +6,14 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table
 @ToString(of = {"id", "text","creationDate"})
 @EqualsAndHashCode(of = {"id"})
-public class Message {
+public class Message implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonView(Views.IdShow.class)
