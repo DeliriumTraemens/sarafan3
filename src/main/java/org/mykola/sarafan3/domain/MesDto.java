@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 
 public class MesDto {
-	@JsonIgnore
+//	@JsonIgnore
 	private Long id;
 	private String text;
 	private LocalDateTime creationDate;
