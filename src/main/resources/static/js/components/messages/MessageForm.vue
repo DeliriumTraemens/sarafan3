@@ -1,8 +1,12 @@
 <template>
-    <div>
-    <input type="text" placeholder="Write Some Post Here" v-model="text">
-    <input type="button" value="Save" @click="save">
-    </div>
+    <v-layout>
+        <v-text-field
+                label="Inputs Form"
+                placeholder="Types Text Here"
+                v-model="text"/>
+        <v-btn @click="save">Save Message</v-btn>
+    <!--<input type="button" value="Save" @click="save">-->
+    </v-layout>
 </template>
 
 <script>
