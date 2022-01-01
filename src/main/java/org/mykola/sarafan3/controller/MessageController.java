@@ -10,6 +10,7 @@ import org.mykola.sarafan3.domain.Views;
 import org.mykola.sarafan3.repository.MessageRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,8 +65,14 @@ public class MessageController {
 	
 	@MessageMapping ("/changeMessage")
 	@SendTo("/topic/activity")
-	public Message messageEditor(JSONObject json) throws JsonProcessingException {
-	
+	public Message messageEditor(JSONObject json, @Payload MesDto mes2, Message mes3) throws JsonProcessingException {
+		
+		System.out.println("\n----------------------------");
+		System.out.println(json);
+		System.out.println("mes 2: "+mes2);
+		System.out.println("mes 3: "+mes3);
+		System.out.println("\n----------------------------");
+		
 		String idx = String.valueOf(json.get("id"));
 		String text = String.valueOf(json.get("text"));
 		if (idx.equals("")){

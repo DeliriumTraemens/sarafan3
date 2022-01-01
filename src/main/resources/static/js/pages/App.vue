@@ -47,7 +47,5 @@
 </script>
 
 <style>
-    .main-app{
-        background-color: bisque;
-    }
+
 </style>

@@ -2,17 +2,16 @@ package org.mykola.sarafan3.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table
-@ToString(of = {"id", "text","creationDate"})
-@EqualsAndHashCode(of = {"id"})
+//@ToString(of = {"id", "text","creationDate"})
+//@EqualsAndHashCode(of = {"id"})
 public class Message implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,17 +30,17 @@ public class Message implements Serializable {
 	
 	public Message() {
 	}
-//
-//	public Message(Long id, String text) {
-//		this.id = id;
-//		this.text = text;
-//	}
-//
-//	public Message(Long id, String text, LocalDateTime creationDate) {
-//		this.id = id;
-//		this.text = text;
-//		this.creationDate = creationDate;
-//	}
+
+	public Message(Long id, String text) {
+		this.id = id;
+		this.text = text;
+	}
+
+	public Message(Long id, String text, LocalDateTime creationDate) {
+		this.id = id;
+		this.text = text;
+		this.creationDate = creationDate;
+	}
 	
 	//	Get Set
 	
@@ -67,5 +66,37 @@ public class Message implements Serializable {
 	
 	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	//EqualsHash
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (! (o instanceof Message)) {
+			return false;
+		}
+		Message message = (Message) o;
+		return getId().equals(message.getId()) &&
+				       Objects.equals(getText(), message.getText()) &&
+				       Objects.equals(getCreationDate(), message.getCreationDate());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getText(), getCreationDate());
+	}
+	
+	//ToString
+	
+	@Override
+	public String toString() {
+		return "\nMessage{" +
+				       "id=" + id +
+				       ", text='" + text + '\'' +
+				       ", creationDate=" + creationDate +
+				       '}';
 	}
 }
