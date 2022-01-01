@@ -10,7 +10,8 @@
 </template>
 
 <script>
-    import {sendMessage} from 'util/ws'
+    // import {sendMessage} from 'util/ws'
+    import messagesApi from 'api/messages'
 
     export default {
         props: ['messages', 'messageAttr'],
@@ -34,24 +35,24 @@
                 this.id = ''
 
 
-                // const message = { text: this.text }
-                // if (this.id) {
-                //     this.$resource('/message{/id}').update({id: this.id}, message).then(result =>
-                //         result.json().then(data => {
-                //             const index = getIndex(this.messages, data.id)
-                //             this.messages.splice(index, 1, data)
-                //             this.text = ''
-                //             this.id = ''
-                //         })
-                //     )
-                // } else {
-                //     this.$resource('/message{/id}').save({}, message).then(result =>
-                //         result.json().then(data => {
-                //             this.messages.push(data)
-                //             this.text = ''
-                //         })
-                //     )
-                // }
+                const message = { text: this.text }
+                if (this.id) {
+                    this.$resource('/message{/id}').update({id: this.id}, message).then(result =>
+                        result.json().then(data => {
+                            const index = getIndex(this.messages, data.id)
+                            this.messages.splice(index, 1, data)
+                            this.text = ''
+                            this.id = ''
+                        })
+                    )
+                } else {
+                    this.$resource('/message{/id}').save({}, message).then(result =>
+                        result.json().then(data => {
+                            this.messages.push(data)
+                            this.text = ''
+                        })
+                    )
+                }
             }
         }
     }
