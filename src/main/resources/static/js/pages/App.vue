@@ -1,13 +1,13 @@
 <template>
     <v-app>
-        <v-app-bar app>
+        <v-toolbar app>
             <v-toolbar-title>Sarafan</v-toolbar-title>
             <v-spacer></v-spacer>
             <span v-if="profile">{{profile.name}}</span>
             <v-btn v-if="profile" icon href="/logout">
                 <v-icon>exit_to_app</v-icon>
             </v-btn>
-        </v-app-bar>
+        </v-toolbar>
         <v-content>
                 <v-container v-if="!profile">Необходимо авторизоваться через
                     <a href="/login">Google</a>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapMutations} from 'vuex'
     import MessagesList from 'components/messages/MessageList.vue'
     import { addHandler } from 'util/ws'
 
@@ -30,22 +30,20 @@
         },
 
         computed: mapState(['profile']),
+        methods: mapMutations(['addMessageMutation','updateMessageMutation', 'removeMessageMutation']),
 
         created() {
             addHandler(data => {
                 if (data.objectType === 'MESSAGE') {
-                    const index = this.messages.findIndex(item => item.id === data.body.id)
                     switch (data.eventType) {
                         case 'CREATE':
+                            this.addMessageMutation(data.body)
+                            break
                         case 'UPDATE':
-                            if (index > -1) {
-                                this.messages.splice(index, 1, data.body)
-                            } else {
-                                this.messages.push(data.body)
-                            }
+                            this.updateMessageMutation(data.body)
                             break
                         case 'REMOVE':
-                            this.messages.splice(index, 1)
+                            this.removeMessageMutation(data.body)
                             break
                         default:
                             console.error(`Looks like the event type if unknown "${data.eventType}"`)

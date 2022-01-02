@@ -4,8 +4,7 @@
         <message-row v-for="message in sortedMessages"
                      :key="message.id"
                      :message="message"
-                     :editMessage="editMessage"
-                     :deleteMessage="deleteMessage" />
+                     :editMessage="editMessage"/>
     </v-layout>
 </template>
 
@@ -13,7 +12,6 @@
         import { mapGetters } from 'vuex'
         import MessageRow from 'components/messages/MessageRow.vue'
         import MessageForm from 'components/messages/MessageForm.vue'
-        import messagesApi from 'api/messages'
 
     export default {
         name: "MessageList",
@@ -30,14 +28,8 @@
         methods: {
             editMessage(message) {
                 this.message = message;
-            },
-            deleteMessage(message){
-                messagesApi.remove(message.id).then(result => {
-                    if (result.ok) {
-                        this.messages.splice(this.messages.indexOf(message), 1)
-                    }
-                })
             }
+
         }
 
     }
