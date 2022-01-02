@@ -10,7 +10,7 @@
     <v-card-actions>
         <v-btn color="orange lighten-2"
                 depressed
-               elevation="3"
+               elevation="4"
                small
                value="Edit"
                @click="edit">Edit</v-btn>
