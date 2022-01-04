@@ -70,26 +70,6 @@ public class MessageController {
 		
 	}
 	
-//	@MessageMapping ("/changeMessage")
-//	@SendTo("/topic/activity")
-//	public Message messageEditor(JSONObject json) throws JsonProcessingException {
-//
-//
-//		String idx = String.valueOf(json.get("id"));
-//		String text = String.valueOf(json.get("text"));
-//		if (idx.equals("")){
-//			Message newMessage=new Message();
-//				newMessage.setText(text);
-//				newMessage.setCreationDate(LocalDateTime.now());
-//			return messageRepo.save(newMessage);
-//		}else{
-//			Message messageToUpdate=messageRepo.findById(Long.valueOf(idx)).get();
-//				messageToUpdate.setText(text);
-//				messageToUpdate.setCreationDate(LocalDateTime.now());
-//
-//			return messageRepo.save(messageToUpdate);
-//			}
-//	}
-	
+	private void fillMeta(){}
 	
 }//EndOfClass

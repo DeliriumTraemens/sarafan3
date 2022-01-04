@@ -30,77 +30,15 @@ public class Message implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonView(Views.FullMessage.class)
 	private LocalDateTime creationDate;
-////	Constructors
-//
-//	public Message() {
-//	}
-//
-//	public Message(Long id, String text) {
-//		this.id = id;
-//		this.text = text;
-//	}
-//
-//	public Message(Long id, String text, LocalDateTime creationDate) {
-//		this.id = id;
-//		this.text = text;
-//		this.creationDate = creationDate;
-//	}
-//
-//	//	Get Set
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		id = id;
-//	}
-//
-//	public String getText() {
-//		return text;
-//	}
-//
-//	public void setText(String text) {
-//		this.text = text;
-//	}
-//
-//	public LocalDateTime getCreationDate() {
-//		return creationDate;
-//	}
-//
-//	public void setCreationDate(LocalDateTime creationDate) {
-//		this.creationDate = creationDate;
-//	}
-//
-//	//EqualsHash
-//
-//	@Override
-//	public boolean equals(Object o) {
-//		if (this == o) {
-//			return true;
-//		}
-//		if (! (o instanceof Message)) {
-//			return false;
-//		}
-//		Message message = (Message) o;
-//		return getId().equals(message.getId()) &&
-//				       Objects.equals(getText(), message.getText()) &&
-//				       Objects.equals(getCreationDate(), message.getCreationDate());
-//	}
-//
-//	@Override
-//	public int hashCode() {
-//		return Objects.hash(getId(), getText(), getCreationDate());
-//	}
-//
-//	//ToString
-//
-//	@Override
-//	public String toString() {
-//		return "\nMessage{" +
-//				       "id=" + id +
-//				       ", text='" + text + '\'' +
-//				       ", creationDate=" + creationDate +
-//				       '}';
-//	}
-}
+	
+	@JsonView(Views.FullMessage.class)
+	private String link;
+	@JsonView(Views.FullMessage.class)
+	private String linkTitle;
+	@JsonView(Views.FullMessage.class)
+	private String linkDescription;
+	@JsonView(Views.FullMessage.class)
+	private String linkCover;
+	
+
+}//EndOfClass
