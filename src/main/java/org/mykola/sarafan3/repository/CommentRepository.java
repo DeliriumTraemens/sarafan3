@@ -1,15 +1,11 @@
 package org.mykola.sarafan3.repository;
 
-import org.mykola.sarafan3.domain.Message;
+import org.mykola.sarafan3.domain.Comment;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface MessageRepository extends JpaRepository<Message, Long> {
-	@EntityGraph(attributePaths = {"comments"})
-	List<Message> findAll();
-}
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
+}

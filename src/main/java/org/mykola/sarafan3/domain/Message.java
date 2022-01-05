@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,6 +31,16 @@ public class Message implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonView(Views.FullMessage.class)
 	private LocalDateTime creationDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id") //Необязательное, но Желательное название поля в кортеже Коммента
+	@JsonView(Views.FullMessage.class)
+	private User author;
+	
+	@OneToMany(mappedBy="message", orphanRemoval = true) //Название поля в кортеже Коммента, ссылающееся на ид объекта Мессадж; orphanRemoval - прибивает все комменты
+	// при удалении объекта сообщения
+	@JsonView(Views.FullMessage.class)
+	private List<Comment> comments;
 	
 	@JsonView(Views.FullMessage.class)
 	private String link;
