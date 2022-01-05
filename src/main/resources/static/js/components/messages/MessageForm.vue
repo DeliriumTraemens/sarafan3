@@ -2,10 +2,11 @@
     <v-layout>
         <v-text-field
                 label="Inputs Form"
-                placeholder="Types Text Here"
-                v-model="text"/>
-        <v-btn @click="save">Save Message</v-btn>
-    <!--<input type="button" value="Save" @click="save">-->
+                placeholder="Type Text Here"
+                v-model="text"
+                @keyup.enter="save"/>
+
+        <v-btn  @click="save">Save Message</v-btn><!--<input type="button" value="Save" @click="save">-->
     </v-layout>
 </template>
 
