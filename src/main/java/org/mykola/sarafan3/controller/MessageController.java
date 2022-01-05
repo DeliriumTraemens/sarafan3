@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mykola.sarafan3.domain.Message;
+import org.mykola.sarafan3.domain.User;
 import org.mykola.sarafan3.domain.Views;
 import org.mykola.sarafan3.dto.EventType;
 import org.mykola.sarafan3.dto.MetaDto;
@@ -14,6 +15,7 @@ import org.mykola.sarafan3.repository.MessageRepository;
 import org.mykola.sarafan3.util.WsSender;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -60,9 +62,14 @@ public class MessageController {
 	
 	
 	@PostMapping
-	public Message create(@RequestBody Message message) throws IOException {
+	public Message create(@RequestBody Message message,
+	                      @AuthenticationPrincipal User user) throws IOException {
+		
+		message.setAuthor(user);
 		message.setCreationDate(LocalDateTime.now());
+		
 		fillMeta(message);
+		
 		Message updatedMessage = messageRepo.save(message);
 		wsSender.accept(EventType.CREATE, updatedMessage);
 		return updatedMessage;

@@ -1,6 +1,10 @@
 package org.mykola.sarafan3.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.mykola.sarafan3.domain.User;
+import org.mykola.sarafan3.domain.Views;
 import org.mykola.sarafan3.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,25 +19,35 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/")
 public class MainController {
+	private final MessageRepository messageRepo;
+	private final ObjectWriter writer;
 	
 	@Autowired
-	MessageRepository messageRepo;
+	public MainController(MessageRepository messageRepo, ObjectMapper mapper) {
+		this.messageRepo = messageRepo;
+		writer = mapper
+                      .setConfig(mapper.getSerializationConfig())
+                      .writerWithView(Views.FullMessage.class);
+	}
+	
 	@Value("${spring.profiles.active}")
 	private String profile;
 	
+	
 	@GetMapping
-	public String mainPage(Model model, @AuthenticationPrincipal User user){
+	public String mainPage(Model model, @AuthenticationPrincipal User user) throws JsonProcessingException {
 		
 		HashMap<Object, Object> data = new HashMap<>();
 		
 		
 		if (user != null) {
 			data.put("profile", user);
-			data.put("messages", messageRepo.findAll());
+			String messages = writer.writeValueAsString(messageRepo.findAll());
+			data.put("messages", messages);
 		}
 		
 		data.put("profile", user);
-		data.put("messages", messageRepo.findAll());
+		model.addAttribute("messages", messageRepo.findAll());
 		model.addAttribute("frontendData", data);
 		model.addAttribute("isDevMode","dev".equals(profile));
 		
