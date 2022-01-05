@@ -96,7 +96,8 @@ public class MessageController {
 			
 			if(matcher.find()){
 			message.setLinkCover(url);
-			} else if (!url.contains("youtu")){
+//			} else if (!url.contains("youtu")){
+			} else if (url.contains("youtu")){
 				MetaDto meta = getMeta(url);
 				message.setLinkCover(meta.getCover());
 				message.setLinkTitle(meta.getTitle());

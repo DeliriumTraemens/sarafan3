@@ -7,6 +7,7 @@
         <v-card-text>
             {{ message.text }}
         </v-card-text>
+        <Media v-if="message.link" :message="message"></Media>
     <v-card-actions>
         <v-btn color="orange lighten-2"
                 depressed
@@ -27,8 +28,10 @@
 </template>
 <script>
     import { mapActions } from 'vuex'
+    import Media from 'components/media/Media.vue'
     export default {
         props: ['message', 'editMessage'],
+        components: {Media},
         methods: {
             ...mapActions(['removeMessageAction']),
             edit() {
