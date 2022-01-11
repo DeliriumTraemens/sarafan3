@@ -1,37 +1,39 @@
 <template>
-    <v-layout>
+    <v-layout row>
         <v-text-field
-                label="Address comment"
-                placeholder="Type Comments here"
+                label="Add comment"
+                placeholder="Write something"
                 v-model="text"
-                @keyup.enter="save"/>
-
-        <v-btn  @click="save">Add Commment</v-btn><!--<input type="button" value="Save" @click="save">-->
+                @keyup.enter="save"
+        />
+        <v-btn @click="save">
+            Add
+        </v-btn>
     </v-layout>
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+    import { mapActions } from 'vuex'
 
     export default {
-        name: "CommentForm",
-        props:['messageId'],
-        //data в виде метода, а не объекта -- для замыкания стейта внутри компонента
+        name: 'CommentForm',
+        props: ['messageId'],
         data() {
             return {
                 text: ''
             }
         },
-        methods:{
+        methods: {
             ...mapActions(['addCommentAction']),
-            async save(){
+            async save() {
                 await this.addCommentAction({
                     text: this.text,
-                    message:{
+                    message: {
                         id: this.messageId
                     }
                 })
-                this.text = '';
+
+                this.text = ''
             }
         }
     }

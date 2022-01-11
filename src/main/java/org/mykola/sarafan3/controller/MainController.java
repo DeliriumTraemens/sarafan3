@@ -1,5 +1,6 @@
 package org.mykola.sarafan3.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -35,6 +36,8 @@ public class MainController {
 	
 	
 	@GetMapping
+	@JsonView(Views.IdName.class)
+	
 	public String mainPage(Model model, @AuthenticationPrincipal User user) throws JsonProcessingException {
 		
 		HashMap<Object, Object> data = new HashMap<>();
@@ -42,12 +45,14 @@ public class MainController {
 		
 		if (user != null) {
 			data.put("profile", user);
+			
 			String messages = writer.writeValueAsString(messageRepo.findAll());
-			data.put("messages", messages);
+			model.addAttribute("messages", messages);
+//			model.addAttribute("messages", messageRepo.findAll());
+		
 		}
 		
 		data.put("profile", user);
-		model.addAttribute("messages", messageRepo.findAll());
 		model.addAttribute("frontendData", data);
 		model.addAttribute("isDevMode","dev".equals(profile));
 		

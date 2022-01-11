@@ -52,7 +52,6 @@ public class MessageController {
 	
 	@GetMapping("{id}")
 	@JsonView(Views.FullMessage.class)
-	
 	public Message getOne(@PathVariable("id") Message message){
 //	public Message getOne(@PathVariable("id") Long id){
 //		return messageRepo.findById(id).get();

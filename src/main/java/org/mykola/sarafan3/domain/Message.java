@@ -37,9 +37,11 @@ public class Message implements Serializable {
 	@JsonView(Views.FullMessage.class)
 	private User author;
 	
-	@OneToMany(mappedBy="message", orphanRemoval = true) //Название поля в кортеже Коммента, ссылающееся на ид объекта Мессадж; orphanRemoval - прибивает все комменты
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy="message", orphanRemoval = true) //Название поля в кортеже Коммента, ссылающееся на ид объекта Мессадж; orphanRemoval
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="message") //Название поля в кортеже Коммента, ссылающееся на ид объекта Мессадж; orphanRemoval
+	// - прибивает все комменты
 	// при удалении объекта сообщения
-	@JsonView(Views.FullMessage.class)
+	@JsonView(Views.IdName.class)
 	private List<Comment> comments;
 	
 	@JsonView(Views.FullMessage.class)

@@ -6,6 +6,8 @@ public final class Views {
 	
 	public interface IdName extends IdShow {}
 	
+	public interface FullComment extends IdName {}
+	
 	public interface FullMessage extends IdName {}
 }
 
