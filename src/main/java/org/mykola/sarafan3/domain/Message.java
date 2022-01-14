@@ -1,7 +1,6 @@
 package org.mykola.sarafan3.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,6 +16,10 @@ import java.util.Objects;
 @Data
 @ToString(of = {"id", "text", "creationDate"})
 @EqualsAndHashCode(of = {"id"})
+@JsonIdentityInfo(
+		generator= ObjectIdGenerators.PropertyGenerator.class,
+		property="id"
+)
 public class Message implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,6 +45,7 @@ public class Message implements Serializable {
 	// - прибивает все комменты
 	// при удалении объекта сообщения
 	@JsonView(Views.IdName.class)
+//	@JsonManagedReference
 	private List<Comment> comments;
 	
 	@JsonView(Views.FullMessage.class)

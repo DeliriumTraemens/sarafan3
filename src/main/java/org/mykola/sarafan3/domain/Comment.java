@@ -1,5 +1,6 @@
 package org.mykola.sarafan3.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +22,8 @@ public class Comment {
 	
 	@ManyToOne
 	@JoinColumn(name = "message_id")//Необязательное, но Желательное название поля в кортеже Коммента
-	@JsonView(Views.FullComment.class)
+	@JsonView(Views.IdName.class)
+//	@JsonBackReference
 	private Message message;
 	
 	@ManyToOne

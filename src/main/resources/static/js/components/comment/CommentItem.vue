@@ -1,9 +1,13 @@
 <template>
-    <v-list-item>
-        <v-list-item-content>
-            <v-list-item-title>{{comment.text}}</v-list-item-title>
-        </v-list-item-content>
-    </v-list-item>
+    <v-list-tile>
+        <v-list-tile-avatar >
+            <img :src="comment.author.userpic" alt="comment.author.name" size="36px">
+        </v-list-tile-avatar>
+        <v-list-tile-content>
+            <v-list-tile-title>{{comment.text}}</v-list-tile-title>
+            <v-list-tile-subtitle>{{comment.author.name}}</v-list-tile-subtitle>
+        </v-list-tile-content>
+    </v-list-tile>
 </template>
 
 <script>
