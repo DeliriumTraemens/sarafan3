@@ -54,10 +54,7 @@ public class MainController {
 			PageRequest pageRequest = PageRequest.of(0, MessageController.MESSAGES_PER_PAGE, sort);
 			MessagePageDto messagePageDto=messageService.findAll(pageRequest);
 			
-			System.out.println("\n\n------------MessagePageDto----------");
-			System.out.println("PageRequest"+pageRequest);
-			System.out.println(messagePageDto);
-			System.out.println("------------MessagePageDto----------\n\n");
+			
 			
 			String messages = writer.writeValueAsString(messagePageDto.getMessages());
 			
