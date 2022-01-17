@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,20 +7,12 @@
 
     <title>Sarafan</title>
     <script th:inline="javascript">
-        let frontendData = [[${frontendData}]];
-        let messages = [# th:utext="${messages}" /];
+        var frontendData = [[${frontendData}]];
+        var messages = [# th:utext="${messages}" /];
     </script>
 </head>
 <body>
-<!--<h1>Всем привет!!!!</h1>
-<h5>learn.javascript.ru - Do not Forget!</h5>-->
-<div id="app">
-<!--    {{messages}}-->
-</div>
-
-<h1>Х У Й</h1>
-
-<!--<script src="/js/main.js"></script>-->
+<div id="app"></div>
 <script th:src="${isDevMode} ? 'http://localhost:8000/main.js' : '/js/main.js'"></script>
 </body>
 </html>
