@@ -1,6 +1,7 @@
 <template>
     <v-container>
         <v-layout align-space-around justify-start column>
+
             <message-form :messageAttr="message" />
             <message-row v-for="message in sortedMessages"
                          :key="message.id"
@@ -16,10 +17,12 @@
         import MessageRow from 'components/messages/MessageRow.vue'
         import MessageForm from 'components/messages/MessageForm.vue'
         import LazyLoader from "components/LazyLoader.vue";
+        import ShopForm from "components/shop/ShopForm.vue";
 
     export default {
         name: "MessageList",
         components:{
+            ShopForm,
             LazyLoader,
             MessageRow,
             MessageForm

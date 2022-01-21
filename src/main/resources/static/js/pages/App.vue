@@ -9,6 +9,10 @@
                 Messages
             </v-btn>
             <v-spacer></v-spacer>
+            <v-btn @click="showShop">
+                Shop
+            </v-btn>
+            <v-spacer></v-spacer>
             <v-btn flat
                    v-if="profile"
                    :disabled="$route.path === '/profile'"
@@ -44,6 +48,9 @@
             showProfile(){
                 this.$router.push('/profile')
 
+            },
+            showShop(){
+                this.$router.push('/shop')
             }
         },
 

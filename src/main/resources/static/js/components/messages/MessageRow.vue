@@ -61,7 +61,7 @@
     import Media from 'components/media/Media.vue'
     import CommentList from "../comment/CommentList.vue";
     export default {
-        props: ['message', 'editMessage'],
+         props: ['message', 'editMessage'],
         components: { CommentList, Media },
         computed:{
         authorName(){
