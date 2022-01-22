@@ -16,8 +16,9 @@
                     <input type="file" placeholder="Input image" @change="onFileSelected">
                    <div id="btn1">
                         <v-file-input
-
-                                label="File input"
+                                small-chips
+                                label="Select an Picture"
+                                v-model="selectedFile"
                         ></v-file-input>
 
                    </div>
@@ -33,6 +34,44 @@
         </div>
 
         </v-layout>
+        <hr class="my-3">
+        <v-layout>
+           <div>
+            <h2>TEST</h2>
+
+            <div v-for="item in items" :key="item.id">
+                <v-card class="my-2" id="itemBox">
+                    <p>
+                    {{item.name}}
+                    </p>
+
+                <p>
+                    {{item.description}}
+                </p>
+                    <p>
+                        {{item.picture}}
+                    </p>
+
+                    <div>
+                        DDDD
+                       <v-img src="static/logo.svg">Fff</v-img>
+
+
+
+                    </div>
+
+                    <hr class="my-1">
+                    <v-btn
+                    @click="showDetail(item)">
+                        Detail
+                    </v-btn>
+
+
+
+                </v-card>
+            </div>
+           </div>
+        </v-layout>
     </v-container>
 
 </template>
@@ -44,6 +83,7 @@
         name: "ShopForm",
         data(){
             return{
+                dialog: false,
                 itemName: '',
                 itemDescription: '',
                 selectedFile: null,
@@ -59,8 +99,17 @@
             }
         },
         methods: {
+            showDetail(item){
+                // alert('Pressed  '+item.id)
+                const req = 'http://localhost:8080/item/'+item.id
+                // alert(req)
+                axios.get(req)
+                .then(resp =>{
+                    console.log({...resp.data})
+                } )
+            },
 
-           async submitFormItem(){
+            submitFormItem(){
                 // alert('V-Form button Pressed')
                 const fdata= new FormData()
                     fdata.append('name', this.itemName)
@@ -69,9 +118,10 @@
 
                 console.log(...fdata)
 
-               await axios.post('http://localhost:8080/message/addImage', fdata)
+                axios.post('http://localhost:8080/message/addImage', fdata)
                     .then(res => {
                         console.log(res)
+                        this.items.push(res.data)
                     })
                 this.itemName=''
                 this.itemDescription=''
@@ -117,6 +167,14 @@
                 console.log(this.selectedFile)
 
             }
+        },
+        mounted(){
+            axios.get('http://localhost:8080/item')
+            .then(res =>{
+                console.log('RESPONSE OFF ITEMS')
+                console.log(res)
+                this.items.push(...res.data)
+            })
         }
     }
 </script>
@@ -128,6 +186,12 @@
 }
 #btn1{
     margin-top: 10px;
+}
+
+#itemBox{
+    border: 1px solid;
+    padding: 10px;
+    background-color: beige;
 }
 </style>
 

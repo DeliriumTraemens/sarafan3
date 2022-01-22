@@ -22,5 +22,6 @@ new Vue({
     store,
     router,
     render: a => a(App),
+    vuetify: new Vuetify({}),
 })
 
