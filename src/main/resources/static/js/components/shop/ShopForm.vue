@@ -26,6 +26,8 @@
                         Submit
                     </v-btn>
                 </v-form>
+                <v-img
+                src="http://localhost:8080/images/2.jpeg" width="300px"></v-img>
 
             </div>
 
@@ -54,9 +56,10 @@
 
                     <div>
                         DDDD
-                       <v-img src="static/logo.svg">Fff</v-img>
 
-
+                        <v-img :src="'./images/'+item.picture"
+                               max-width="150px"
+                               max-height="150px"></v-img>
 
                     </div>
 
@@ -65,10 +68,8 @@
                     @click="showDetail(item)">
                         Detail
                     </v-btn>
-
-
-
                 </v-card>
+
             </div>
            </div>
         </v-layout>
@@ -168,7 +169,7 @@
 
             }
         },
-        mounted(){
+        created(){
             axios.get('http://localhost:8080/item')
             .then(res =>{
                 console.log('RESPONSE OFF ITEMS')
