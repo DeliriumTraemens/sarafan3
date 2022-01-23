@@ -29,8 +29,6 @@ public class ItemController {
 	
 	@GetMapping("{id}")
 	public Item getOneItem(@PathVariable("id")Long id){
-		System.out.println("\n----------------------");
-		System.out.println(itemRepo.findById(id).get());
 		return itemRepo.findById(id).get();
 	}
 	
