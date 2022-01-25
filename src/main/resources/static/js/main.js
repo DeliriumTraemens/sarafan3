@@ -15,13 +15,13 @@ if (frontendData.profile) {
     connect()
 }
 
-Vue.use(Vuetify)
+Vue.use(Vuetify )
 
 new Vue({
     el: '#app',
     store,
     router,
     render: a => a(App),
-    vuetify: new Vuetify({}),
+    vuetify: new Vuetify({iconfont: 'mdiSvg'}),
 })
 

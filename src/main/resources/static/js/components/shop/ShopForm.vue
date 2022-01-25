@@ -57,9 +57,14 @@
                     <div>
                         DDDD
 
-                        <v-img :src="'./images/'+item.picture"
+<!--                        <v-img :src="'./images/'+item.picture"-->
+<!--                               max-width="150px"-->
+<!--                               max-height="150px">-->
+<!--                        </v-img>-->
+                        <v-img :src="'http://localhost:8080/images/'+item.picture"
                                max-width="150px"
-                               max-height="150px"></v-img>
+                               max-height="150px">
+                        </v-img>
 
                     </div>
 

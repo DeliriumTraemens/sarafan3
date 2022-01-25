@@ -12,6 +12,11 @@
             <v-btn @click="showShop">
                 Shop
             </v-btn>
+            <v-btn @click="showCategory">
+                Categories
+            </v-btn>
+
+
             <v-spacer></v-spacer>
             <v-btn text
                    v-if="profile"
@@ -33,6 +38,7 @@
 <script>
     import {mapState, mapMutations} from 'vuex'
     import { addHandler } from 'util/ws'
+    import { mdiExitToApp } from '@mdi/js'
 
     export default {
 
@@ -49,9 +55,13 @@
                 this.$router.push('/profile')
 
             },
+            showCategory(){
+                this.$router.push('/categories')
+            },
             showShop(){
                 this.$router.push('/shop')
             }
+
         },
 
         created() {
