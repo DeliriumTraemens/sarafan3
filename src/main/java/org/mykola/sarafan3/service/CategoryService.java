@@ -47,4 +47,20 @@ public class CategoryService {
 		
 		return catRepo.save(category);
 	}
+	
+	public Category addSubCategory(Long parent, String name, String description) {
+		Category parentCat = catRepo.findById(parent).get();
+		Category newSubCategory = new Category();
+		
+		newSubCategory.setParentCat(parentCat);
+		newSubCategory.setParent(parent);
+		newSubCategory.setName(name);
+		newSubCategory.setDescription(description);
+		newSubCategory.setCreationDate(LocalDateTime.now());
+		
+//		System.out.println("\n=========SUB CAT==========");
+//		System.out.println(newSubCategory +"\n");
+		
+		return catRepo.save(newSubCategory);
+	}
 }

@@ -15,7 +15,9 @@
             <v-btn @click="showCategory">
                 Categories
             </v-btn>
-
+            <v-btn @click="showTree">
+                Tree
+            </v-btn>
 
             <v-spacer></v-spacer>
             <v-btn text
@@ -29,9 +31,9 @@
                 <v-icon>exit_to_app</v-icon>
             </v-btn>
         </v-app-bar>
-        <v-content>
+        <v-main>
             <router-view></router-view>
-        </v-content>
+        </v-main>
     </v-app>
 </template>
 
@@ -60,6 +62,9 @@
             },
             showShop(){
                 this.$router.push('/shop')
+            },
+            showTree(){
+                this.$router.push('/tree')
             }
 
         },

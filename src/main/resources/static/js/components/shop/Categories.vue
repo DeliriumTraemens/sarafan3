@@ -1,6 +1,10 @@
 <template>
+    <v-main>
     <v-container>
         <v-layout>
+            <hr>
+<!--            <TreeNode/>-->
+            <hr>
             <div>
                 <h3>Editor</h3>
                 <v-form id="ed1">
@@ -29,7 +33,7 @@
         <v-container>
             <template>
                 <v-row justify="center">
-                    <v-expansion-panels accordion>
+                    <v-expansion-panels accordion focusable>
                         <v-expansion-panel
                                 v-for="cat in categoryList"
                                 :key="cat.id"
@@ -37,10 +41,28 @@
                             <v-expansion-panel-header>{{cat.name}}</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                {{cat.description}}
                                 </p>
-                                <v-text-field label="Name"></v-text-field>
-                                <v-btn>Submit</v-btn>
+
+                                <v-text-field label="Name" v-model="subCatName"></v-text-field>
+                                <v-text-field label="Description" v-model="subCatDescription"></v-text-field>
+                                <v-btn @click="submitSubCategory(cat)">Submit</v-btn>
+
+                                <hr class="my-3">
+                                <template v-if="cat.childrenSet">
+                                    <v-expansion-panels focusable>
+                                        <v-expansion-panel
+                                                v-for="(item,i) in cat.childrenSet"
+                                                :key="item.id"
+                                        >
+                                            <v-expansion-panel-header>{{item.name}}</v-expansion-panel-header>
+                                            <v-expansion-panel-content>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            </v-expansion-panel-content>
+                                        </v-expansion-panel>
+                                    </v-expansion-panels>
+                                </template>
+                                <hr>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                     </v-expansion-panels>
@@ -63,17 +85,24 @@
         </v-container>
 
     </v-container>
+    </v-main>
 </template>
 
 <script>
     import axios from 'axios'
+    import TreeNode from "../Tree/TreeRoot.vue";
     export default {
         name: "Categories",
+        components: {
+            TreeNode
+        },
         data () {
             return {
                 selectedFile: null,
                 catName : '',
                 catDescription: '',
+                subCatName : '',
+                subCatDescription: '',
                 categoryList:[],
                 currentCategory:{
                     id: '',
@@ -93,6 +122,19 @@
                 fd.append('description', this.catDescription )
 
                 axios.post('http://localhost:8080/category', fd)
+                .then(res =>{
+                    console.log(res)
+                })
+            },
+            submitSubCategory(cat){
+                // alert(cat.name)
+                this.parentId=cat.id
+                const fds= new FormData()
+                fds.append('parent', this.parentId)
+                fds.append('name', this.subCatName)
+                fds.append('description', this.subCatDescription)
+                console.log(fds)
+                axios.post('http://localhost:8080/category/subcat', fds)
                 .then(res =>{
                     console.log(res)
                 })

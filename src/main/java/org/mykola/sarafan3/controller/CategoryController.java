@@ -25,8 +25,8 @@ public class CategoryController {
 	
 	@GetMapping
 	public List<Category> getAll(){
-		System.out.println("\n============= CAT LIST =============");
-		System.out.println(catService.getAll());
+//		System.out.println("\n============= CAT LIST =============");
+//		System.out.println(catService.getAll());
 		return catService.getAll();
 	}
 	
@@ -40,6 +40,16 @@ public class CategoryController {
 			return catService.saveNewCategory(category);
 		}
 		
+	}
+	
+	@PostMapping("/subcat")
+	public Category addSubCategory(
+			@RequestParam(name = "parent")Long parent,
+			@RequestParam(name ="name")String name,
+			@RequestParam(name ="description")String description
+			){
+		
+		return catService.addSubCategory(parent, name, description);
 	}
 
 
