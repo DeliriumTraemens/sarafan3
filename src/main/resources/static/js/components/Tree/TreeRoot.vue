@@ -1,11 +1,11 @@
 <template>
     <v-app>
         <v-container>
-            <div>
-                <TitleHeader :title="title"/>
-                <hr>
+            <div class="tree">
+                <ul class="tree-list">
+                    <TreeNode :node="catList"/>
+                </ul>
             </div>
-                <TreeNode :categList="catList" />
         </v-container>
     </v-app>
 </template>
@@ -44,5 +44,8 @@
 </script>
 
 <style scoped>
-
+    .tree-list ul {
+        margin: 6px 0;
+        padding-left: 16px;
+    }
 </style>

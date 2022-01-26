@@ -5,7 +5,7 @@
             </div>
         <div v-if="categList">
 
-            <div v-for="cat in categList" :key="cat.id">
+            <div v-for="cat in node" :key="cat.id">
                 <div>
                     <TitleHeader :title="cat.name"/>
 
@@ -34,7 +34,7 @@
     export default {
         name: "TreeNode",
         props: {
-            categList: [Array]
+            node: [Array]
         },
         components: {
             TitleHeader
