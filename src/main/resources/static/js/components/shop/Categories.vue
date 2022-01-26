@@ -57,7 +57,10 @@
                                         >
                                             <v-expansion-panel-header>{{item.name}}</v-expansion-panel-header>
                                             <v-expansion-panel-content>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                {{item.description}}
+                                                <v-text-field label="Name" v-model="subCatName"></v-text-field>
+                                                <v-text-field label="Description" v-model="subCatDescription"></v-text-field>
+                                                    <v-btn @click="submitSubCategory(cat)">Submit</v-btn>
                                             </v-expansion-panel-content>
                                         </v-expansion-panel>
                                     </v-expansion-panels>
