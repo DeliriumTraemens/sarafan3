@@ -24,7 +24,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping
-	public List<Category> getAll(){
+	public List<Category> getAll() {
 //		System.out.println("\n============= CAT LIST =============");
 //		System.out.println(catService.getAll());
 		return catService.getAll();
@@ -32,11 +32,11 @@ public class CategoryController {
 	
 	@PostMapping
 	public Category saveNewCategory(Category category) throws IOException {
-		if(category==null){
-			 System.out.println("\n\n ========= CATEGORY IS NULL ==============");
+		if (category == null) {
+			System.out.println("\n\n ========= CATEGORY IS NULL ==============");
 			return null;
 		} else {
-			System.out.println("\n\n ------------+++++++++Passed to Service");
+			System.out.println("\n\n ------------+++++++++Passed to Service+++++++--------");
 			return catService.saveNewCategory(category);
 		}
 		
@@ -44,13 +44,31 @@ public class CategoryController {
 	
 	@PostMapping("/subcat")
 	public Category addSubCategory(
-			@RequestParam(name = "parent")Long parent,
-			@RequestParam(name ="name")String name,
-			@RequestParam(name ="description")String description
-			){
+			@RequestParam(name = "parent") Long parent,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "description") String description,
+			@RequestParam(name = "shortDescription") String shortDescription
+	                              ) {
 		
-		return catService.addSubCategory(parent, name, description);
+		return catService.addSubCategory(parent, name, description, shortDescription);
 	}
-
-
+	
+	@PatchMapping
+	public Category pathCategory(
+			@RequestParam(name = "id") Long id,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "description") String description
+	                            ) {
+		return catService.patchCategory(id, name, description);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteCategory(@PathVariable(name = "id") Long id) {
+		
+		catRepo.deleteById(id);
+		
+		return "Deleted";
+	}
+	
+	
 }//EndOfClass

@@ -38,7 +38,7 @@ public class Category {
 	@ManyToOne
 	private Category parentCat;
 	
-	@OneToMany(mappedBy="parentCat")
+	@OneToMany(mappedBy="parentCat",cascade = CascadeType.ALL)
 	private Set<Category> childrenSet = new HashSet<Category>();
 	
 	

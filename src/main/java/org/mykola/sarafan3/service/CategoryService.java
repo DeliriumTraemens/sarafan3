@@ -18,7 +18,8 @@ public class CategoryService {
 	}
 	
 	public List<Category> getAll() {
-		return catRepo.findAll();
+//		return catRepo.findByRoot(true);
+		return catRepo.findByRootOrderById(true);
 	}
 	
 	
@@ -32,8 +33,8 @@ public class CategoryService {
 			category.setRoot(true);
 		}
 		
-		System.out.println("\n\n=======================CATEGORY TO SAVE==========");
-		System.out.println(category);
+//		System.out.println("\n\n=======================CATEGORY TO SAVE==========");
+//		System.out.println(category);
 		return catRepo.save(category);
 	}
 	
@@ -48,7 +49,7 @@ public class CategoryService {
 		return catRepo.save(category);
 	}
 	
-	public Category addSubCategory(Long parent, String name, String description) {
+	public Category addSubCategory(Long parent, String name, String description, String shortDescription) {
 		Category parentCat = catRepo.findById(parent).get();
 		Category newSubCategory = new Category();
 		
@@ -56,11 +57,26 @@ public class CategoryService {
 		newSubCategory.setParent(parent);
 		newSubCategory.setName(name);
 		newSubCategory.setDescription(description);
+		newSubCategory.setShortDescription(shortDescription);
 		newSubCategory.setCreationDate(LocalDateTime.now());
 		
 //		System.out.println("\n=========SUB CAT==========");
 //		System.out.println(newSubCategory +"\n");
 		
 		return catRepo.save(newSubCategory);
+	}
+	
+	public Category patchCategory(Long id, String name, String description) {
+		Category catFromDb = catRepo.findById(id).get();
+		if (!name.equals(""))
+		{
+			catFromDb.setName(name);
+		}
+		if(!description.equals(""))
+		{
+			catFromDb.setDescription(description);
+		}
+		
+		return catRepo.save(catFromDb);
 	}
 }

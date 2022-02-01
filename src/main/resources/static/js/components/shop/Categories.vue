@@ -38,7 +38,9 @@
                                 v-for="cat in categoryList"
                                 :key="cat.id"
                         >
-                            <v-expansion-panel-header>{{cat.name}}</v-expansion-panel-header>
+                            <v-expansion-panel-header>{{cat.name}}
+
+                            </v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <p>
                                 {{cat.description}}
@@ -60,7 +62,7 @@
                                                 {{item.description}}
                                                 <v-text-field label="Name" v-model="subCatName"></v-text-field>
                                                 <v-text-field label="Description" v-model="subCatDescription"></v-text-field>
-                                                    <v-btn @click="submitSubCategory(cat)">Submit</v-btn>
+                                                    <v-btn @click="submitSubCategory(item)">Submit</v-btn>
                                             </v-expansion-panel-content>
                                         </v-expansion-panel>
                                     </v-expansion-panels>

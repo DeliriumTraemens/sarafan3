@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app class="app111">
         <v-app-bar app>
             <v-toolbar-title>Sarafan</v-toolbar-title>
             <v-btn text
@@ -38,12 +38,15 @@
 </template>
 
 <script>
+    import '@mdi/font/css/materialdesignicons.css'
     import {mapState, mapMutations} from 'vuex'
     import { addHandler } from 'util/ws'
     import { mdiExitToApp } from '@mdi/js'
 
     export default {
-
+        icons: {
+            iconfont: 'mdi', // default - only for display purposes
+        },
         computed: mapState(['profile']),
         methods: {
             ...mapMutations(['addMessageMutation',
@@ -107,6 +110,8 @@
     }
 </script>
 
-<style>
-
+<style >
+.app111{
+    margin-bottom:2px;
+}
 </style>

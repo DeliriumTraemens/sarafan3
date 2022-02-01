@@ -5,7 +5,8 @@ import Auth from 'pages/Auth.vue'
 import Profile from 'pages/Profile.vue'
 import ShopForm from "components/shop/ShopForm.vue";
 import Categories from "../components/shop/Categories.vue";
-import TreeRoot from "../components/Tree/TreeRoot.vue";
+import Tree from "../components/Tree/Tree.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,7 +15,7 @@ const routes = [
     { path: '/profile', component: Profile },
     { path: '/categories', component: Categories},
     { path: '/shop', component: ShopForm },
-    { path: '/tree', component: TreeRoot},
+    { path: '/tree', component: Tree},
     { path: '*', component: MessagesList }
 ]
 
